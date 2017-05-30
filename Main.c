@@ -9,6 +9,47 @@ void Logo() {
  	printw("\t+-+-+-+-+-+ +-+-+-+ +-+-+-+-+\n");
 }
 
+void Player(int *lvl) {
+	clear();
+	int i = 1;
+	int j = 0;
+	int generate_num[*lvl];
+	int attempt[*lvl];
+	int bulls = 0;
+	int cows = 0;
+	int n = 1;
+	int check = 0;
+	generate_num[0] = 1 + rand() % 9;
+	for (i = 1; i < *lvl; ++i) {
+		generate_num[i] = rand() % 10;
+		for (j = 0; j < i; ++j) {
+			if (generate_num[i] == generate_num[j])
+				--i;
+		}
+	}
+	Logo();
+	printw("N\tAttempt\tCows\tBulls\n");
+	while (bulls != *lvl) {
+		bulls = 0;
+		cows = 0;
+		printw("%d\t", n);
+		ReadAttempt(attempt, *lvl);
+		i = *lvl - 1;
+		for (i = 0; i < *lvl; ++i)
+			if (attempt[i] == generate_num[i]) bulls++;
+		for (i = 0; i < *lvl; ++i)
+			for (j = 0; j < *lvl; ++j)
+				if (attempt[i] == generate_num[j]) cows++;
+		cows -= bulls;
+		printw("\t%d\t%d\n", cows, bulls);
+		n++;
+	}
+	printw("You win!\nInput number for exit to menu: ");
+	scanw("%d", &check);
+	clear();
+
+}
+
 void Menu(int *item) {
  	char tmp;
  	clear();
