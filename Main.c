@@ -9,6 +9,23 @@ void Logo() {
  	printw("\t+-+-+-+-+-+ +-+-+-+ +-+-+-+-+\n");
 }
 
+void Menu(int *item) {
+ 	char tmp;
+ 	clear();
+ 	Logo();
+ 	*item = 0;
+	printw("\t\tWelcome to menu!\n");
+	printw("\t\t1.Play\n\t\t2.Game rules\n\t\t3.Difficulty level");
+	printw("\n\t\t4.Exit\n\t\t5.About authors\n");
+	printw("\tMenu item number: ");
+	do {
+		tmp = getch();
+	} while(tmp < '1' || tmp > '6');
+	*item = tmp - '0';
+	clear();
+}
+
+
 int main() {
 	initscr(); 
 	scrollok(stdscr, TRUE); 
