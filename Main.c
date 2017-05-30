@@ -110,6 +110,12 @@ void DifficultyLVL(int *lvl) {
 	clear();
 }
 
+void Game(int *lvl) {
+	srand(time(NULL));
+	if (*lvl == 0) DifficultyLVL(&*lvl);
+	OnePlayer(&*lvl);
+}
+
 void GameRules()  {
 	clear();
 	Logo();
