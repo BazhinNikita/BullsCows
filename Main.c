@@ -3,6 +3,12 @@
 #include <time.h>
 #include <ncurses.h>
 
+void Logo() {
+	printw("\t+-+-+-+-+-+ +-+-+-+ +-+-+-+-+\n");
+ 	printw("\t|B|U|L|L|S| |A|N|D| |C|O|W|S|\n");
+ 	printw("\t+-+-+-+-+-+ +-+-+-+ +-+-+-+-+\n");
+}
+
 int main() {
 	initscr(); 
 	scrollok(stdscr, TRUE); 
