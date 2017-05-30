@@ -127,6 +127,16 @@ void GameRules()  {
 	clear();
 }
 
+void Authors() {
+	clear();
+	Logo();
+	printw("\t\tAbove the game worked\n\t\tStudents of the Faculty of ICT\n");
+	printw("\t\tBazhin Nikita\n\t\tAtuchin Stanislav\n\t\tAndreychenko Fillip\n");
+	printw("\n\t\tNovosibirsk\n\t\tSibSUTI\n\t\t2017\n\n");
+	printw("\tClick any button to return: ");
+	getch();
+	clear();
+}
 
 int main() {
 	initscr(); 
