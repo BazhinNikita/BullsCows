@@ -47,8 +47,35 @@ void Player(int *lvl) {
 	printw("You win!\nInput number for exit to menu: ");
 	scanw("%d", &check);
 	clear();
-
 }
+
+void ReadAttempt(int attempt[], int lvl){
+	int i = 1;
+	int j = 0;
+	char c[lvl];
+	do {
+    	c[0] = getch();
+    } while (c[0] <= '0' || c[0] > '9');
+    printw("%c", c[0]);
+    attempt[0] = c[0] - '0';
+    do {
+    	int flag = 0;
+    	c[i] = getch();
+    	if (c[i] < '0' || c[i] > '9')
+    		flag = 1;
+    	else
+    	for (j = i-1; j >= 0; j--)
+    		if (c[j] == c[i])
+    			flag = 1;
+    	if (flag == 1)
+    		i--; 
+    	if (flag == 0){
+    		printw("%c", c[i]);
+    		attempt[i] = c[i] - '0';
+    	}
+    } while (++i != lvl);
+}
+
 
 void Menu(int *item) {
  	char tmp;
