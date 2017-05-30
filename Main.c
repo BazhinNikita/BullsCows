@@ -25,6 +25,23 @@ void Menu(int *item) {
 	clear();
 }
 
+void DifficultyLVL(int *lvl) {
+	char tmp;
+	clear();
+	Logo();
+	*lvl = 0;
+	printw("You can choose the difficulty level!\n");
+	printw("\t\t1.Easy (4 numbers)\n");
+	printw("\t\t2.Medium (5 numbers)\n");
+	printw("\t\t3.Hard (6 numbers)\n");
+	printw("LVL (input number): ");
+	do {
+		tmp = getch();
+	} while(tmp < '1' || tmp > '3');
+	*lvl = 3 + tmp - '0';
+	clear();
+}
+
 void GameRules()  {
 	clear();
 	Logo();
