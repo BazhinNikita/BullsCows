@@ -1,27 +1,35 @@
-CFLAGS = -Wall -Werror -MP -MMD -lncurses
-SOURCES = src/main.c src/bulls.c
-OBJECTS = $(SOURCES:.c=.o)
-.PH: clean all bullscows
- 
-Program :
-	make bin/bullscows
-bin/bullscows : build/main.o build/bulls.o
-	mkdir -p bin;
-	gcc build/main.o build/bulls.o -o bin/bullscows $(CFLAGS)
- 
-build/main.o : src/main.c src/bulls.h
-	mkdir -p build;
-	gcc -c src/main.c -o build/main.o $(CFLAGS)
- 
-build/bulls.o : src/bulls.c src/bulls.h
-	mkdir -p build;
-	gcc -c src/bulls.c -o build/bulls.o $(CFLAGS)
- 	
-clean :
-	rm -rf build/*.d 
-	rm -rf build/*.o
-	rm bin/bullscows
-	@echo "All files have been cleaned."
- 	
--include build/*.d
+CFLAGS = -Wall -Werror -MP -MMD -c -lncurses 
+LFLAGS = -g -o
+CMP = gcc
 
+all: main
+
+main: build/main.o build/bulls.o
+	mkdir -p bin
+	$(CMP) build/main.o build/bulls.o $(LFLAGS) bin/main -lncurses
+
+build/main.o: src/main.c
+	mkdir -p build
+	$(CMP) $(CFLAGS) src/main.c -o build/main.o
+
+build/bulls.o: src/bulls.c
+	mkdir -p build
+	$(CMP) $(CFLAGS) src/bulls.c -o build/bulls.o 
+
+ctest:	build/mtest.o build/btest.o build/bulls.o
+	mkdir -p bin
+	mkdir -p bin/test
+	$(CMP) build/mtest.o build/btest.o build/bulls.o $(LFLAGS) bin/test/test -lncurses
+
+build/mtest.o: test/main.c
+	mkdir -p build
+	$(CMP) -I thirdparty $(CFLAGS) test/main.c -o build/mtest.o
+
+build/btest.o: test/bulls.c
+	mkdir -p build
+	$(CMP) -I src -I thirdparty $(CFLAGS) test/bulls.c -o build/btest.o
+	
+
+
+clean:
+	rm -rf bin build
